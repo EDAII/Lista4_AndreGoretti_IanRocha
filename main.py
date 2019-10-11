@@ -1,9 +1,9 @@
-import requests
 import json
 from PIL import Image
-import urllib.request as urllib
+import urllib.request
 import io
 from io import BytesIO
+import requests
 
 def read_cards():
     with open('cartas.txt', 'r') as json_file:
@@ -35,16 +35,33 @@ def todos_nomes():
 def acha_cartas(palavra):
     nomes = []
     for card in tac:
-            nomes.append(card["name"])
-            nome = [i for i in nomes if palavra in i]
-    print(nome)
+        nomes.append(card["name"])
+        nome = [i for i in nomes if palavra in i]
+        print(nome)
 
 def Imagem(carta):
     for card in tac:
         if card["name"] == str(carta):
-            response = requests.get(card["imageUrl"])
-            img = Image.open(BytesIO(response.content))
+            url = card["imageUrl"]
+            with urllib.request.urlopen(url) as url:
+                f = io.BytesIO(url.read())
+            img = Image.open(f)
+            img.show()    
             break
+
+def todas_imagens(carta):
+    for card in tac:
+        if card["name"] == str(carta):
+          url = card["imageUrl"]
+          with urllib.request.urlopen(url) as url:
+                f = io.BytesIO(url.read())
+          img = Image.open(f)
+          img.show()    
+
+def todas_edicao(edicao):
+    for card in tac:
+        if card["set"] == str(edicao):
+            print(card["name"])
 
 # response = requests.get('https://api.magicthegathering.io/v1/cards')
 # if response:
@@ -83,7 +100,9 @@ print("--------menu----------")
 print("1.Achar carta")
 print("2.Regras da carta")
 print("3.Imagem da carta")
-print("4.Todos os Nomes")
+print("4.Todas as Imagens da carta")
+print("5.Todos os Nomes")
+print("6.Cartas da edicao")
 
 caso = input("Selecione modo:")
 
@@ -101,7 +120,15 @@ if caso == str(3):
     carta = input("insira a carta: ")
     Imagem(carta)
 
-if caso == str(4):
+if caso == str(5):
     todos_nomes()
+
+if caso == str(4):
+    carta = input("Insira a carta:")
+    todas_imagens(carta)
+
+if caso == str(6):
+    edicao = input("Insira a edicao: ")
+    todas_edicao(edicao)
 
 
