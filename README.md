@@ -15,7 +15,7 @@ Os temas de projeto são:
 | Matrícula | Nome |  
 |-----------------------|---------------------|  
 | 16/011202|André Goretti Motta
-| xx/xxxxxxx | xxxx xxxx xxxxx |  
+| 16/0124778 | Ian Pereira de Sousa Rocha |  
 ## Descrição do projeto
 Aqui você deve dizer o objetivo deste projeto e o que realmente foi feito neste repositório.
 ## Guia de instalação
