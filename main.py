@@ -11,6 +11,10 @@ def read_cards():
     with open('cartas.txt', 'r') as json_file:
         return list(json.load(json_file))
 
+def read_cardsMenor():
+    with open('cartas2.txt', 'r') as json_file:
+        return list(json.load(json_file))        
+
 
 def find_rule(carta):
     for card in tac:
@@ -100,6 +104,33 @@ def radixSort():
     maior = 0
     contador = 0
     start_time = time.time()
+    
+    
+    for card in tac:
+        if card.get("multiverseid") == None:
+            card["multiverseid"] = 0
+        if card.get("multiverseid") > maior:
+            maior = card.get("multiverseid")
+        contador = contador + 1    
+    print(contador)
+    
+    #print(maior)
+    exp = 1
+    cont = 0
+    while maior/exp > 0: 
+        cont = cont + 1
+        countingSort(tac,exp) 
+        exp *= 10
+    todos_id()
+    print("segundos: ", (time.time() - start_time))
+    #print(cont)   
+
+def radixSortMenor():
+    maior = 0
+    contador = 0
+    start_time = time.time()
+
+    tac = read_cardsMenor()
 
     for card in tac:
         if card.get("multiverseid") == None:
@@ -118,7 +149,8 @@ def radixSort():
         exp *= 10
     print("segundos: ", (time.time() - start_time))
     #todos_id()
-    #print(cont)        
+    #print(cont)    
+         
 
 # response = requests.get('https://api.magicthegathering.io/v1/cards')
 # if response:
@@ -162,6 +194,7 @@ print("4.Todas as Imagens da carta")
 print("5.Todos os Nomes")
 print("6.Cartas da edicao")
 print("7.Ordenar as Cartas")
+print("8. Ordenar Pagina com 4700 cartas")
 
 caso = input("Selecione modo:")
 
@@ -192,3 +225,6 @@ if caso == str(6):
 
 if caso == str(7):
     radixSort()
+
+if caso == str(8):
+    radixSortMenor()    
