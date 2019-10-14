@@ -1,32 +1,27 @@
-# Gerenciamento cards MTG
-Repositório de Template para os projetos da disciplina 
-```
-Nome do Repositório (Apague este tópico)
-  O nome do repositório deve seguir o padrão <TemaProjeto>_<Nome Projeto>.
-  O nome do projeto deve representar o que foi implementado no mesmo (Ex:
-  Game xyz, Implementações Otimizadas de Algoritmos, Aplicativo xpto)
+# Gerenciamento cards MTG 
 
-Os temas de projeto são:  
- - Busca - Algoritmos de busca Radix  
- 
- Ex: Busca_ConcorrenteDaGoogle
-```
 ## Alunos  
 | Matrícula | Nome |  
 |-----------------------|---------------------|  
-| 16/011202|André Goretti Motta
+| 16/0112028|André Goretti Motta
 | 16/0124778 | Ian Pereira de Sousa Rocha |  
 ## Descrição do projeto
-Aqui você deve dizer o objetivo deste projeto e o que realmente foi feito neste repositório.
+Um Sistema de busca e ordenação de todas as cartas do jogo "Magic the Gathering"
 ## Guia de instalação
 Aqui devem estar descritas as dependências do projeto (versões de linguagens e ferramentas) e as instruções necessárias para executar o projeto. 
 ### Dependências do projeto
+Internet para algumas funcionalidade como a primeira vez ao rodar.
+Python 3 base
 ### Como executar o projeto
+Digite:
+```
+python3 main.py
+```
 ## Capturas de tela
 Neste tópico você deve adicionar imagens do funcionamento do projeto.  
  - As imagens devem ser salvas no repositório.
  - Imagens salvas em domínios eternos tendem a ficar indisponíveis e devem ser evitadas.   
 ## Conclusões
-Aqui você diz se o algoritmo utilizado foi útil, se tem limitações, etc.
+Unica Restrição é que precisa de internet para algumas das funcionalidade. A ordenaçao eh extremamente rapida para mais de 47000 cartas
 ## Referências
 Caso tenha utilizado algum agoritmo como base, citar o mesmo devidamente para  evitar quaisquer denuncias de plágio.
