@@ -4,6 +4,8 @@ import urllib.request
 import io
 from io import BytesIO
 import requests
+import random
+import time
 
 def read_cards():
     with open('cartas.txt', 'r') as json_file:
@@ -63,16 +65,60 @@ def todas_edicao(edicao):
         if card["set"] == str(edicao):
             print(card["name"])
 
+def todos_id():
+    for card in tac:
+        print(card["multiverseid"])          
+
+def countingSort(array, exp1):
+    n = len(array)
+    output =  [0] * n
+    count = [0] * (10) 
+
+    for i in range(0, n): 
+        temp = array[i]
+        
+
+        index = (temp["multiverseid"]//exp1) 
+        count[ (index)%10 ] += 1
+ 
+    for i in range(1,10): 
+        count[i] += count[i-1] 
+  
+    i = n-1
+    while i>=0: 
+        temp = array[i]
+        index = (temp["multiverseid"]//exp1) 
+        output[ count[ (index)%10 ] - 1] = array[i] 
+        count[ (index)%10 ] -= 1
+        i -= 1
+
+    i = 0
+    for i in range(0,len(array)): 
+        array[i] = output[i] 
+        
 def radixSort():
-    # for card in tac:
-    #     print(card["name"])
+    maior = 0
+    contador = 0
+    start_time = time.time()
 
-    # max1 = max(tac("name"))
-
-    # exp = 1
-    # while max1/exp > 0: 
-    #     countingSort(array,exp) 
-    #     exp *= 10
+    for card in tac:
+        if card.get("multiverseid") == None:
+            card["multiverseid"] = 0
+        if card.get("multiverseid") > maior:
+            maior = card.get("multiverseid")
+        contador = contador + 1    
+    print(contador)
+    
+    #print(maior)
+    exp = 1
+    cont = 0
+    while maior/exp > 0: 
+        cont = cont + 1
+        countingSort(tac,exp) 
+        exp *= 10
+    print("segundos: ", (time.time() - start_time))
+    #todos_id()
+    #print(cont)        
 
 # response = requests.get('https://api.magicthegathering.io/v1/cards')
 # if response:
@@ -82,6 +128,8 @@ def radixSort():
 tac = []
 i = 1
 tac = read_cards()
+random.shuffle(tac)
+
  
 if tac == []:    
 
@@ -144,26 +192,3 @@ if caso == str(6):
 
 if caso == str(7):
     radixSort()
-
-def countingSort(array, exp1):
-    n = len(array)
-    output =  [0] * n
-    count = [0] * (10) 
-
-    for i in range(0, n): 
-        index = (array[i]/exp1) 
-        count[ (index)%10 ] += 1
- 
-    for i in range(1,10): 
-        count[i] += count[i-1] 
-  
-    i = n-1
-    while i>=0: 
-        index = (array[i]/exp1) 
-        output[ count[ (index)%10 ] - 1] = array[i] 
-        count[ (index)%10 ] -= 1
-        i -= 1
-
-    i = 0
-    for i in range(0,len(array)): 
-        array[i] = output[i] 
