@@ -19,12 +19,6 @@ sudo apt-get install matplotlib
 Digite:
 ```
 python3 main.py
-```
-## Capturas de tela
-Neste tópico você deve adicionar imagens do funcionamento do projeto.  
- - As imagens devem ser salvas no repositório.
- - Imagens salvas em domínios eternos tendem a ficar indisponíveis e devem ser evitadas.   
+``` 
 ## Conclusões
-Unica Restrição é que precisa de internet para algumas das funcionalidade. A ordenaçao eh extremamente rapida para mais de 47000 cartas
-## Referências
-Caso tenha utilizado algum agoritmo como base, citar o mesmo devidamente para  evitar quaisquer denuncias de plágio.
+Unica Restrição é que precisa de internet para algumas das funcionalidade. A ordenação para mais de 47000 cartas demonstrando por grafico o tempo em relação a quantidade de cartas
