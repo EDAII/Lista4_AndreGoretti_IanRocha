@@ -6,6 +6,10 @@ from io import BytesIO
 import requests
 import random
 import time
+import matplotlib.pyplot as plt
+i = 1
+contador = 0
+tempo_corrido = 0
 
 def read_cards():
     with open('cartas.txt', 'r') as json_file:
@@ -15,6 +19,13 @@ def read_cardsMenor():
     with open('cartas2.txt', 'r') as json_file:
         return list(json.load(json_file))        
 
+def ler_tempo():
+    with open('tempo.txt', 'r') as json_file:
+        return list(json.load(json_file))
+
+def ler_quantidade():
+    with open('quantidade.txt', 'r') as json_file:
+        return list(json.load(json_file))
 
 def find_rule(carta):
     for card in tac:
@@ -102,17 +113,17 @@ def countingSort(array, exp1):
         
 def radixSort():
     maior = 0
-    contador = 0
     start_time = time.time()
-    
+    global contador
+    global tempo_corrido
     
     for card in tac:
         if card.get("multiverseid") == None:
             card["multiverseid"] = 0
         if card.get("multiverseid") > maior:
             maior = card.get("multiverseid")
-        contador = contador + 1    
-    print(contador)
+        contador =  contador + 1    
+    print( contador)
     
     #print(maior)
     exp = 1
@@ -122,13 +133,14 @@ def radixSort():
         countingSort(tac,exp) 
         exp *= 10
     todos_id()
-    print("segundos: ", (time.time() - start_time))
-    #print(cont)   
+    tempo_corrido =  time.time() - start_time   
+    print("segundos: ", tempo_corrido)
 
 def radixSortMenor():
     maior = 0
-    contador = 0
     start_time = time.time()
+    global contador
+    global tempo_corrido
 
     tac = read_cardsMenor()
 
@@ -137,8 +149,8 @@ def radixSortMenor():
             card["multiverseid"] = 0
         if card.get("multiverseid") > maior:
             maior = card.get("multiverseid")
-        contador = contador + 1    
-    print(contador)
+        contador =  contador + 1    
+    print( contador)
     
     #print(maior)
     exp = 1
@@ -147,7 +159,8 @@ def radixSortMenor():
         cont = cont + 1
         countingSort(tac,exp) 
         exp *= 10
-    print("segundos: ", (time.time() - start_time))
+    tempo_corrido =  time.time() - start_time   
+    print("segundos: ", tempo_corrido)
     #todos_id()
     #print(cont)    
          
@@ -157,15 +170,15 @@ def radixSortMenor():
 #     print("Top")
 # else:
 #     print("Fail")    
-tac = []
-i = 1
-tac = read_cards()
-random.shuffle(tac)
 
- 
+tac = read_cards()
+tempo = ler_tempo()
+quantidade = ler_quantidade()
+
+random.shuffle(tac)
 if tac == []:    
 
-    while i <= 476:
+    while i <= 200:
         busca = requests.get('https://api.magicthegathering.io/v1/cards?page=' + str(i))
         x = busca.text
         y = json.loads(x)
@@ -194,7 +207,8 @@ print("4.Todas as Imagens da carta")
 print("5.Todos os Nomes")
 print("6.Cartas da edicao")
 print("7.Ordenar as Cartas")
-print("8. Ordenar Pagina com 4700 cartas")
+print("8.Ordenar Pagina com quantidade diferente")
+print("9.Plotar tempo")
 
 caso = input("Selecione modo:")
 
@@ -225,6 +239,24 @@ if caso == str(6):
 
 if caso == str(7):
     radixSort()
+    tempo.append(tempo_corrido)
+    with open('tempo.txt', 'w')as outfile:
+        json.dump(tempo, outfile)
+    quantidade.append(contador)
+    with open('quantidade.txt', 'w')as outfile:
+        json.dump(quantidade, outfile)
+
 
 if caso == str(8):
     radixSortMenor()    
+    tempo.append(tempo_corrido)
+    with open('tempo.txt', 'w')as outfile:
+        json.dump(tempo, outfile)
+    quantidade.append(contador)
+    with open('quantidade.txt', 'w')as outfile:
+        json.dump(quantidade, outfile)
+    
+if caso == str(9):
+    plt.plot(tempo, quantidade, 'ro')
+    plt.axis([0, 60, 0, 50000]) 
+    plt.show()
