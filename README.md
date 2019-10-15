@@ -11,7 +11,10 @@ Um Sistema de busca e ordenação de todas as cartas do jogo "Magic the Gatherin
 Aqui devem estar descritas as dependências do projeto (versões de linguagens e ferramentas) e as instruções necessárias para executar o projeto. 
 ### Dependências do projeto
 Internet para algumas funcionalidade como a primeira vez ao rodar.
-Python 3 base
+Python 3 base <br>
+```
+sudo apt-get install matplotlib
+```
 ### Como executar o projeto
 Digite:
 ```
